@@ -50,8 +50,8 @@ const results = () => {
                 $('tbody tr th.center').each((index, element) => {
                     if ($(element).attr('data-stat') && $(element).attr('data-stat') == 'number') {
                         players.add({
-                            no: $(element).text(),
                             foreignKey: team[i].primaryKey,
+                            no: $(element).text(),
                             team: team[i].teamName
                         });
                     };

@@ -9,5 +9,6 @@ module.exports = function(server) {
     const result = await results();
     res.json(result);
   });
+
   server.use(router);
 };
