@@ -21,10 +21,9 @@ const fetchPlayerData = async () => {
     return cheerio.load(result.data);
 }
 
-let count = 0;
-
 const teamData = async (_callback) => {
     const $ = await fetchData();
+    let count = 0;
 
     $('th.left a').each((index, element) => {
         teams.add({
@@ -35,16 +34,12 @@ const teamData = async (_callback) => {
         count++;
     })
 
-
     _callback();
 }
 
 const results = () => {
     teamData(async () => {
-
         const team = [...teams];
-
-        count = 0;
 
         if (team.length > 0) {
             for (let i = 0; i < team.length; i++) {
@@ -59,7 +54,7 @@ const results = () => {
                             foreignKey: team[i].primaryKey,
                             team: team[i].teamName
                         });
-                    }
+                    };
                 });
 
                 $('td.left').each((index, element) => {
@@ -67,7 +62,7 @@ const results = () => {
                         playerName.add({
                             name: $(element).text()
                         });
-                    }
+                    };
                 });
 
                 $('td.center').each((index, element) => {
@@ -75,7 +70,7 @@ const results = () => {
                         playerPos.add({
                             pos: $(element).text()
                         });
-                    }
+                    };
                 });
 
                 $('td.right').each((index, element) => {
@@ -83,7 +78,7 @@ const results = () => {
                         playerHeight.add({
                             height: $(element).text()
                         });
-                    }
+                    };
                 });
 
                 $('td.right').each((index, element) => {
@@ -91,7 +86,7 @@ const results = () => {
                         playerWeight.add({
                             weight: $(element).text()
                         });
-                    }
+                    };
                 });
             }
         }
@@ -101,20 +96,19 @@ const results = () => {
         const playerPosArray = [...playerPos];
         const playerHeightArray = [...playerHeight];
         const playerWeightArray = [...playerWeight];
-        const combinedPlayerStats = []
+        const combinedPlayerStats = [];
 
         for(let i = 0; i < playerArray.length; i++) {
             combinedPlayerStats.push({...playerArray[i], ...playerNameArray[i], ...playerPosArray[i], ...playerHeightArray[i], ...playerWeightArray[i]});
-        }
+        };
 
         console.log(combinedPlayerStats);
 
         return {
             teams: [...teams],
             players: [...combinedPlayerStats]
-        }
+        };
     });
-}
+};
 
 module.exports = results;
-
