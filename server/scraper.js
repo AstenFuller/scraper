@@ -51,8 +51,8 @@ const results = () => {
                     if ($(element).attr('data-stat') && $(element).attr('data-stat') == 'number') {
                         players.add({
                             foreignKey: team[i].primaryKey,
-                            no: $(element).text(),
-                            team: team[i].teamName
+                            team: team[i].teamName,
+                            no: $(element).text()
                         });
                     };
                 });
